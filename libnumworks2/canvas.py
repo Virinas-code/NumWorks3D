@@ -11,7 +11,7 @@ from typing import Any, Final, Optional
 WIDTH: Final[int] = 320
 HEIGHT: Final[int] = 222
 
-SCALE: Final[int] = 1
+SCALE: Final[int] = 2
 
 type Color = tuple[int, int, int]
 
@@ -82,9 +82,14 @@ class Canvas:
 
     def fill_rect(self, x: int, y: int, width: int, height: int, color: Color) -> None:
         """Fill a rectangle."""
+        old_fast_mode = copy(self.fast_mode)
+        self.fast_mode = True
+
         for vx in range(x, x + width):
             for vy in range(y, y + height):
                 self.set_pixel(vx, vy, color)
+
+        self.fast_mode = old_fast_mode
 
         if not self.fast_mode:
             self.canvas.update()

@@ -3,7 +3,7 @@
 This is the complete description of the `kandinsky` module. You can get this list on your
 calculator by pressing *toolbox* and going to **Modules** then **kandinsky**.
 """
-import tkinter as __tk
+import tkinter as tk
 from typing import Any as __Any, Optional as __Optional
 
 KEY_LEFT = 0
@@ -183,7 +183,7 @@ for __letter, __keys in __TK_TO_ION_ALPHABET.items():
 __pixels: list[list[tuple[int, int, int]]] = [[(0, 0, 0)] * __WIDTH] * __HEIGHT
 __pressed: dict[int, bool] = {}
 
-__window = __tk.Tk()
+__window = tk.Tk()
 
 
 def __quit() -> None:
@@ -200,7 +200,7 @@ def _fast_mainloop() -> None:  # pyright: ignore [reportUnusedFunction]
     __window.mainloop()
 
 
-__canvas = __tk.Canvas(
+__canvas = tk.Canvas(
     __window,
     width=__WIDTH,
     height=__HEIGHT,
@@ -227,7 +227,7 @@ def __c(rgb: tuple[int, int, int]) -> str:
 
 
 def __key_callback(event: __Any) -> None:
-    if isinstance(event, __tk.Event):
+    if isinstance(event, tk.Event):
         if event.type == "2":
             print(event.keysym)
             keys: list[int] = __TK_TO_ION.get(event.keysym, [54])
@@ -276,7 +276,7 @@ def set_pixel(x: int, y: int, color: tuple[int, int, int]) -> None:
     # _pixels[y][x] = color
     try:
         __canvas.create_line(x, y, x + 1, y, fill=__c(color))
-    except __tk.TclError:
+    except tk.TclError:
         exit()  # pylint: disable=consider-using-sys-exit
     if not __fast_mode:
         __canvas.update()

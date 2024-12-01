@@ -275,71 +275,59 @@ CUBE_TRIANGLES: list[Triangle] = [
 ]
 
 while True:
-    for px in range(250, 310):
-        for py in range(10, 90):
-            kd.fill_rect(0, 0, 320, 222, (255, 255, 255))
+    kd.fill_rect(0, 0, 320, 222, (255, 255, 255))
 
-            # The back face
-            draw_line(project_vertex(vAb), project_vertex(vBb), RED)
-            draw_line(project_vertex(vBb), project_vertex(vCb), RED)
-            draw_line(project_vertex(vCb), project_vertex(vDb), RED)
-            draw_line(project_vertex(vDb), project_vertex(vAb), RED)
+    # The back face
+    draw_line(project_vertex(vAb), project_vertex(vBb), RED)
+    draw_line(project_vertex(vBb), project_vertex(vCb), RED)
+    draw_line(project_vertex(vCb), project_vertex(vDb), RED)
+    draw_line(project_vertex(vDb), project_vertex(vAb), RED)
 
-            # The front-to-back edges
-            draw_line(project_vertex(vAf), project_vertex(vAb), GREEN)
-            draw_line(project_vertex(vBf), project_vertex(vBb), GREEN)
-            draw_line(project_vertex(vCf), project_vertex(vCb), GREEN)
-            draw_line(project_vertex(vDf), project_vertex(vDb), GREEN)
+    # The front-to-back edges
+    draw_line(project_vertex(vAf), project_vertex(vAb), GREEN)
+    draw_line(project_vertex(vBf), project_vertex(vBb), GREEN)
+    draw_line(project_vertex(vCf), project_vertex(vCb), GREEN)
+    draw_line(project_vertex(vDf), project_vertex(vDb), GREEN)
 
-            # The front face
-            draw_line(project_vertex(vAf), project_vertex(vBf), BLUE)
-            draw_line(project_vertex(vBf), project_vertex(vCf), BLUE)
-            draw_line(project_vertex(vCf), project_vertex(vDf), BLUE)
-            draw_line(project_vertex(vDf), project_vertex(vAf), BLUE)
+    # The front face
+    draw_line(project_vertex(vAf), project_vertex(vBf), BLUE)
+    draw_line(project_vertex(vBf), project_vertex(vCf), BLUE)
+    draw_line(project_vertex(vCf), project_vertex(vDf), BLUE)
+    draw_line(project_vertex(vDf), project_vertex(vAf), BLUE)
 
-            draw_line(Point(10, 10), Point(20, 60), (255, 0, 0))
-            draw_line(Point(20, 60), Point(120, 90), (0, 255, 0))
-            draw_line(Point(120, 90), Point(10, 10), (0, 0, 255))
+    draw_line(Point(10, 10), Point(20, 60), (255, 0, 0))
+    draw_line(Point(20, 60), Point(120, 90), (0, 255, 0))
+    draw_line(Point(120, 90), Point(10, 10), (0, 0, 255))
 
-            draw_wireframe_triangle(
-                Point(40, 100), Point(80, 10), Point(200, 50), (0, 0, 0)
-            )
-            draw_shaded_triangle(
-                Point(40, 100, 1.0),
-                Point(80, 10, 0.3),
-                Point(200, 50, 0.7),
-                (255, 255, 0),
-            )
-            draw_wireframe_triangle(
-                Point(40, 100), Point(80, 10), Point(200, 50), (0, 0, 0)
-            )
+    draw_wireframe_triangle(Point(40, 100), Point(80, 10), Point(200, 50), (0, 0, 0))
+    draw_shaded_triangle(
+        Point(40, 100, 1.0),
+        Point(80, 10, 0.3),
+        Point(200, 50, 0.7),
+        (255, 255, 0),
+    )
+    draw_wireframe_triangle(Point(40, 100), Point(80, 10), Point(200, 50), (0, 0, 0))
 
-            draw_wireframe_triangle(
-                Point(200, 200), Point(160, 90), Point(px, py), (0, 0, 0)
-            )
-            draw_filled_triangle(
-                Point(200, 200), Point(160, 90), Point(px, py), (255, 0, 255)
-            )
-            draw_wireframe_triangle(
-                Point(200, 200), Point(160, 90), Point(px, py), (0, 0, 0)
-            )
+    draw_wireframe_triangle(Point(200, 200), Point(160, 90), Point(210, 210), (0, 0, 0))
+    draw_filled_triangle(
+        Point(200, 200), Point(160, 90), Point(210, 210), (255, 0, 255)
+    )
+    draw_wireframe_triangle(Point(200, 200), Point(160, 90), Point(210, 210), (0, 0, 0))
 
-            cube_vertices: list[Vertex] = [
-                Vertex(1, 1, 1),
-                Vertex(-1, 1, 1),
-                Vertex(-1, -1, 1),
-                Vertex(1, -1, 1),
-                Vertex(1, 1, -1),
-                Vertex(-1, 1, -1),
-                Vertex(-1, -1, -1),
-                Vertex(1, -1, -1),
-            ]
+    cube_vertices: list[Vertex] = [
+        Vertex(1, 1, 1),
+        Vertex(-1, 1, 1),
+        Vertex(-1, -1, 1),
+        Vertex(1, -1, 1),
+        Vertex(1, 1, -1),
+        Vertex(-1, 1, -1),
+        Vertex(-1, -1, -1),
+        Vertex(1, -1, -1),
+    ]
 
-            for index, vertex in enumerate(cube_vertices):
-                cube_vertices[index] = Vertex(
-                    vertex.x - (1.5 + (py / 100)), vertex.y, vertex.z + (7 - (py / 10))
-                )
+    for index, vertex in enumerate(cube_vertices):
+        cube_vertices[index] = Vertex(vertex.x - (1.5), vertex.y, vertex.z + (7))
 
-            render_object(cube_vertices, CUBE_TRIANGLES)
+    render_object(cube_vertices, CUBE_TRIANGLES)
 
-            _fast_update()
+    _fast_update()
