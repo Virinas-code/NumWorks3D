@@ -2,7 +2,7 @@
 """Custom frame implementation."""
 from copy import copy
 
-from libnumworks2.modules import kandinsky
+from numworks import kandinsky
 
 
 class Framebuffer:
